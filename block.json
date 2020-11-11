@@ -1,0 +1,14 @@
+{
+	"name": "aib/algolia-instantsearch-blocks",
+	"title": "Algolia Instantsearch Blocks",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Example block written with ESNext standard and JSX support – build step required.",
+	"textdomain": "algolia-instantsearch-blocks",
+	"supports": {
+		"html": false
+	},
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}

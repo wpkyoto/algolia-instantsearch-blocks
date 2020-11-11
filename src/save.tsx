@@ -1,0 +1,33 @@
+import React from 'react'
+/**
+ * Retrieves the translation of text.
+ *
+ * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
+ */
+import { __ } from '@wordpress/i18n';
+import { PoweredBy } from 'react-instantsearch-dom';
+import { SaveComponent } from './block.interfaces';
+import { HitItems } from './components/algolia/Hits';
+
+/**
+ * The save function defines the way in which the different attributes should
+ * be combined into the final markup, which is then serialized by the block
+ * editor into `post_content`.
+ *
+ * @see https://developer.wordpress.org/block-editor/developers/block-api/block-edit-save/#save
+ *
+ * @return {WPElement} Element to render.
+ */
+export const Save:SaveComponent = (props) => {
+	const { attributes } = props;
+	const { isUsingPaidPlan } = attributes
+	const hits = props.attributes.hits || []
+	return (
+		<>
+			<HitItems hits={hits} attributes={attributes} /> 
+			{isUsingPaidPlan ? null : <PoweredBy />}
+		</>
+	);
+}
+
+export default Save

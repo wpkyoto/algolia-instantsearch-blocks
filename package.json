@@ -1,0 +1,46 @@
+{
+	"name": "algolia-instantsearch-blocks",
+	"version": "0.1.0",
+	"description": "Example block written with ESNext standard and JSX support – build step required.",
+	"author": "The WordPress Contributors",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"scripts": {
+		"format:js": "wp-scripts format-js",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"start": "tsc --watch & wp-scripts start",
+		"build": "tsc && wp-scripts build",
+		"wp": "wp-env",
+		"wp:start": "wp-env start",
+		"wp:stop": "wp-env stop",
+		"wp:destroy": "wp-env destroy",
+		"wp:cli": "wp-env run cli",
+		"packages-update": "wp-scripts packages-update",
+		"postinstall": "rm -rf node_modules/@types/algoliasearch-helper"
+	},
+	"devDependencies": {
+		"@babel/preset-typescript": "^7.12.1",
+		"@types/classnames": "^2.2.11",
+		"@types/react": "^16.9.56",
+		"@types/react-instantsearch-dom": "^6.3.0",
+		"@types/wordpress__block-editor": "^2.2.9",
+		"@types/wordpress__date": "^3.3.1",
+		"@types/wordpress__i18n": "^3.11.0",
+		"@wordpress/env": "^2.1.0",
+		"@wordpress/scripts": "^12.5.0",
+		"typescript": "^4.0.5"
+	},
+	"dependencies": {
+		"@wordpress/block-editor": "^5.1.2",
+		"@wordpress/blocks": "^6.24.1",
+		"@wordpress/components": "^11.1.1",
+		"@wordpress/editor": "^9.24.2",
+		"algoliasearch": "^4.6.0",
+		"classnames": "^2.2.6",
+		"lodash": "^4.17.20",
+		"react": "^17.0.1",
+		"react-dom": "^17.0.1",
+		"react-instantsearch-dom": "^6.8.2"
+	}
+}
