@@ -2,11 +2,7 @@ import React, {FC, useCallback, useMemo, useState} from 'react'
 import { connectSearchBox, SearchBox as AlgoliaSearchBox} from 'react-instantsearch-dom'
 
 export const WordPressStyledSearchBox = connectSearchBox(({currentRefinement, refine }) => {
-    const [tmpSearchWord, updateSearchWord] = useState('')
-    const searchWord = useMemo(() => {
-        if (!tmpSearchWord) return currentRefinement
-        return tmpSearchWord
-    }, [tmpSearchWord, currentRefinement])
+    const [searchWord, updateSearchWord] = useState(currentRefinement)
     const handleSubmit = useCallback((event) => {
         event.preventDefault()
         refine(searchWord)

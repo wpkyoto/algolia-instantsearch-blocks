@@ -20,6 +20,7 @@ export const Save: InstantSearchSaveComponent =  ({
         postTitleScore,
         tagScore,
         searchFormStyle,
+        hitsItems,
     }
 }) => (
     <div
@@ -40,5 +41,6 @@ export const Save: InstantSearchSaveComponent =  ({
         data-post-title-score={postTitleScore}
         data-tag-score={tagScore}
         data-search-box-style={searchFormStyle}
+        data-hit-items={hitsItems}
     />
 )

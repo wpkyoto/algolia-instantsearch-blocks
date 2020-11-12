@@ -1,5 +1,5 @@
 import React, {createElement, FC, useMemo} from 'react'
-import { connectHits, PoweredBy} from 'react-instantsearch-dom';
+import { Configure, connectHits, PoweredBy} from 'react-instantsearch-dom';
 import { AlgoliaHit, HitItemVisibleConfig } from '../../block.interfaces';
 import { HitItems } from '../../components/algolia/Hits';
 import { AlgoliaInstantSearchWithClient } from '../../components/algolia/InstantSearch';
@@ -28,6 +28,7 @@ export const InstantsearchFrontend: FC = () => {
         appId,
         apiKey,
         indexName,
+        hitsItems,
         hitAttributes,
     } = useMemo(() => {
         const hitItem: HitItemVisibleConfig = {
@@ -44,6 +45,7 @@ export const InstantsearchFrontend: FC = () => {
             appId: rootElement.getAttribute('data-app-id'),
             apiKey: rootElement.getAttribute('data-searchonly-api-key'),
             indexName: rootElement.getAttribute('data-index-name') || 'wp_posts_post',
+            hitsItems: getNumberAttribute(rootElement, 'data-hit-items', 10),
             hitAttributes: hitItem,
         }
     }, [rootElement])
@@ -57,7 +59,9 @@ export const InstantsearchFrontend: FC = () => {
             appId={appId}
             indexName={indexName}
         >
-            
+            <Configure
+                hitsPerPage={hitsItems}
+            />
             <SearchBox ui={searchFormStyle} />
             <ContainerHits
                 attributes={hitAttributes}
