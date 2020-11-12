@@ -1,0 +1,15 @@
+name: Testing build
+on: [push]
+jobs:
+  tag:
+    name: New release
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Build
+      run: |
+        npm install
+        npm run build
+        rm -rf node_modules/
+        zip -r "${GITHUB_WORKSPACE}/plugin.zip" .
