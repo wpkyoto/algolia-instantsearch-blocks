@@ -21,6 +21,8 @@ import { HitItemVisibilityPanel } from './components/panel/HitItemVisibility';
 import { HitItemContentPanel } from './components/panel/HitItemContent';
 import { RelatedItemConfiguration } from './components/panel/RelatedItemConfig';
 import { ListLayoutControl } from './components/blockControls/ListLayout';
+import { AlgoliaInstantSearchWithClient } from './components/algolia/InstantSearch';
+const { useEntityProp } = require('@wordpress/core-data');
 
 export const Edit: EditComponent = (props ) => {
 	const  { setAttributes, attributes }  = props;
@@ -50,9 +52,15 @@ export const Edit: EditComponent = (props ) => {
 		return param
 	}, [categories, tags, categoryScore, tagScore])
 	const { isUsingPaidPlan } = attributes
+	const [algoliaSearchOnlyApiKey] = useEntityProp( 'root', 'site', 'aib_algolia_searchonly_api_key' )
+	const [algoliaAppId] = useEntityProp( 'root', 'site', 'aib_algolia_app_id' )
 
 	return (
-		<>
+		<AlgoliaInstantSearchWithClient
+			appId={algoliaAppId}
+			searchOnlyAPIKey={algoliaSearchOnlyApiKey}
+			indexName={props.attributes.indexName}
+		>
 			<InspectorControls>
 				<SearchOption {...props} />
 				<HitItemVisibilityPanel {...props} />
@@ -81,7 +89,7 @@ export const Edit: EditComponent = (props ) => {
 			{/* @ts-expect-error */}
 			<WPHits setAttributes={setAttributes} attributes={attributes} />
 			{isUsingPaidPlan ? null: <PoweredBy />}
-		</>
+		</AlgoliaInstantSearchWithClient>
 	);
 }
 

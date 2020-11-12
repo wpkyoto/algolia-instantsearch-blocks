@@ -1,4 +1,3 @@
-import React, { useMemo } from 'react'
 /**
  * Registers a new block provided a unique name and an object defining its behavior.
  *
@@ -17,12 +16,7 @@ import { __ } from '@wordpress/i18n';
  */
 import Edit from './edit';
 import Save from './save';
-import algoliasearch, { SearchClient } from 'algoliasearch'
 import { CustomBlockAttributeSettings } from './block.interfaces';
-import { AlgoliaInstantSearch } from './components/algolia/InstantSearch';
-const { useEntityProp } = require('@wordpress/core-data');
-const dummyClient = algoliasearch('XXX','XXXX')
-
 
 const initialAttributes: CustomBlockAttributeSettings = {
 	hits: {
@@ -142,53 +136,7 @@ registerBlockType( 'aib/algolia-instantsearch-blocks', {
 	/**
 	 * @see ./edit.js
 	 */
-	edit: (props) => {
-		const [algoliaSearchOnlyApiKey] = useEntityProp( 'root', 'site', 'aib_algolia_searchonly_api_key' )
-		const [algoliaAppId] = useEntityProp( 'root', 'site', 'aib_algolia_app_id' )
-		const algoliaClient = useMemo(() => {
-			if (!algoliaAppId || !algoliaSearchOnlyApiKey) return null;
-			return algoliasearch(algoliaAppId,algoliaSearchOnlyApiKey)
-		}, [algoliaAppId, algoliaSearchOnlyApiKey])
-		const searchClient = useMemo(() => {
-			if (!algoliaClient) {
-				return {
-					search(requests: any) {
-						return Promise.resolve({
-							results: requests.map(() => ({
-							  hits: [],
-							  nbHits: 0,
-							  nbPages: 0,
-							  page: 0,
-							  processingTimeMS: 0,
-							})),
-						});
-					}
-				} as any as SearchClient
-			}
-			return {
-				search(requests: any) {
-					return algoliaClient.search(requests)
-				}
-			} as SearchClient
-		}, [algoliaClient])
-		return (
-			<AlgoliaInstantSearch
-				searchClient={searchClient}
-				indexName={props.attributes.indexName}
-			>
-				<Edit {...props} />
-			</AlgoliaInstantSearch>
-		)
-	},
+	edit: Edit,
 
-	save: (props) => {
-		return (
-			<AlgoliaInstantSearch
-				searchClient={dummyClient}
-				indexName={"dummy"}
-			>
-				<Save {...props} />
-			</AlgoliaInstantSearch>
-		)
-	},
+	save: Save,
 } );
