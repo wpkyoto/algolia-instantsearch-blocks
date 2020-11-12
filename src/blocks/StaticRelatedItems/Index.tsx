@@ -94,19 +94,19 @@ export const registerStaticRelatedItemBlock = () => {
 	 *
 	 * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
 	 */
-	registerBlockType( 'aib/algolia-instantsearch-blocks', {
+	registerBlockType( 'aib/static-related-items', {
 		/**
 		 * This is the display title for your block, which can be translated with `i18n` functions.
 		 * The block inserter will show this name.
 		 */
-		title: __( 'Algolia Instantsearch Blocks', 'algolia-instantsearch-blocks' ),
+		title: __( 'Static Related Items', 'algolia-instantsearch-blocks' ),
 
 		/**
 		 * This is a short description for your block, can be translated with `i18n` functions.
 		 * It will be shown in the Block Tab in the Settings Sidebar.
 		 */
 		description: __(
-			'Algolia Instantsearchの検索結果を記事に埋め込むブロックです。',
+			'現在の記事と関連性の高い記事リストを、記事内に保存できるブロックです。Staticに保存するため、記事更新時のみデータが更新されます。',
 			'algolia-instantsearch-blocks'
 		),
 
@@ -114,13 +114,13 @@ export const registerStaticRelatedItemBlock = () => {
 		 * Blocks are grouped into categories to help users browse and discover them.
 		 * The categories provided by core are `common`, `embed`, `formatting`, `layout` and `widgets`.
 		 */
-		category: 'widgets',
+		category: 'aib',
 
 		/**
 		 * An icon property should be specified to make it easier to identify a block.
 		 * These can be any of WordPress’ Dashicons, or a custom svg element.
 		 */
-		icon: 'search',
+		icon: 'sticky',
 
 		/**
 		 * Optional block extended support features.

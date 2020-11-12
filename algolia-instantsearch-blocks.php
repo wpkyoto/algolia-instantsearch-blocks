@@ -10,42 +10,51 @@
  *
  * @package         aib
  */
-
-/**
- * Registers all block assets so that they can be enqueued through the block editor
- * in the corresponding context.
- *
- * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
- */
-function aib_algolia_instantsearch_blocks_block_init() {
-	$dir = dirname( __FILE__ );
-
-	$script_asset_path = "$dir/build/index.asset.php";
-	if ( ! file_exists( $script_asset_path ) ) {
-		throw new Error(
-			'You need to run `npm start` or `npm run build` for the "aib/algolia-instantsearch-blocks" block first.'
+class AIB_Blocks {
+	function __construct() {
+		add_action( 'init', array( $this, 'configure_blocks' ) );
+		add_filter( 'block_categories', array( $this, 'configure_block_categories' ), 10, 1 );
+	}
+	public function configure_blocks() {
+		$dir = dirname( __FILE__ );
+	
+		$script_asset_path = "$dir/build/index.asset.php";
+		if ( ! file_exists( $script_asset_path ) ) {
+			throw new Error(
+				'You need to run `npm start` or `npm run build` for the "aib/algolia-instantsearch-blocks" block first.'
+			);
+		}
+		$index_js     = 'build/index.js';
+		$script_asset = require( $script_asset_path );
+		wp_register_script(
+			'aib-algolia-instantsearch-blocks-block-editor',
+			plugins_url( $index_js, __FILE__ ),
+			$script_asset['dependencies'],
+			$script_asset['version']
+		);
+		wp_set_script_translations( 'aib-algolia-instantsearch-blocks-block-editor', 'algolia-instantsearch-blocks' );
+	
+		wp_register_style(
+			'aib-algolia-instantsearch-style',
+			'https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/algolia-min.css'
+		);
+	
+		register_block_type( 'aib/static-related-items', array(
+			'editor_script' => 'aib-algolia-instantsearch-blocks-block-editor',
+		) );
+	}
+	public function configure_block_categories( $categories ) {
+		return array_merge(
+			$categories,
+			array(
+				array(
+					'slug' => 'aib',
+					'title' => __( 'Algolia Instantsearch Blocks', 'algolia-instantsearch-blocks' ),
+				),
+			)
 		);
 	}
-	$index_js     = 'build/index.js';
-	$script_asset = require( $script_asset_path );
-	wp_register_script(
-		'aib-algolia-instantsearch-blocks-block-editor',
-		plugins_url( $index_js, __FILE__ ),
-		$script_asset['dependencies'],
-		$script_asset['version']
-	);
-	wp_set_script_translations( 'aib-algolia-instantsearch-blocks-block-editor', 'algolia-instantsearch-blocks' );
-
-	wp_register_style(
-		'aib-algolia-instantsearch-style',
-		'https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/algolia-min.css'
-	);
-
-	register_block_type( 'aib/algolia-instantsearch-blocks', array(
-		'editor_script' => 'aib-algolia-instantsearch-blocks-block-editor',
-	) );
 }
-add_action( 'init', 'aib_algolia_instantsearch_blocks_block_init' );
 
 
 class AIB_Settings {
@@ -127,4 +136,5 @@ class AIB_Settings {
 	}
 }
 
+new AIB_Blocks();
 new AIB_Settings();
