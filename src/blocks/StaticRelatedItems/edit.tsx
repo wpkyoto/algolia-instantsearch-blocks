@@ -9,7 +9,7 @@ import { PoweredBy, Configure } from 'react-instantsearch-dom';
 
 import {InspectorControls, BlockControls } from '@wordpress/block-editor'
 import WPHits from '../../components/algolia/Hits'
-import { SearchOption } from '../../components/panel/SearchOptions';
+import { SearchOption } from './components/SearchOptions';
 import { HitItemVisibilityPanel } from '../../components/panel/HitItemVisibility';
 import { HitItemContentPanel } from '../../components/panel/HitItemContent';
 import { RelatedItemConfiguration } from '../../components/panel/RelatedItemConfig';

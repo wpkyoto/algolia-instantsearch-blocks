@@ -5,14 +5,12 @@ import { AlgoliaSearchAttributes, AlgoliaSearchSettingAttributes, CustomBlockAtt
 export type InstantSearchAttributeSettings = PostDisplaySettingAttributes & AlgoliaSearchSettingAttributes &{
     searchOnlyApiKey: CustomBlockAttribute;
     appId: CustomBlockAttribute;
+    searchFormStyle: CustomBlockAttribute;
 }
 export type InstantSearchAttributes = PostDisplayAttributes & AlgoliaSearchAttributes & {
-    searchOnlyApiKey: {
-        type: 'string',
-    },
-    appId: {
-        type: 'string',
-    }
+    searchOnlyApiKey: string;
+    appId: string;
+    searchFormStyle: 'algolia' | 'wordpress'
 }
 
 export type InstantSearchEditComponentProps = BlockEditProps<InstantSearchAttributes>

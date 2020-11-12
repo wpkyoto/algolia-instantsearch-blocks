@@ -15,6 +15,11 @@ export const Save: InstantSearchSaveComponent =  ({
         displayPostDate,
         displayPostTags,
         excerptLength,
+        enableExperimentalRelatedItems,
+        categoryScore,
+        postTitleScore,
+        tagScore,
+        searchFormStyle,
     }
 }) => (
     <div
@@ -30,5 +35,10 @@ export const Save: InstantSearchSaveComponent =  ({
         data-display-post-date={displayPostDate}
         data-display-post-tags={displayPostTags}
         data-excerpt-length={excerptLength}
+        data-enable-experimental-related-items={enableExperimentalRelatedItems}
+        data-category-score={categoryScore}
+        data-post-title-score={postTitleScore}
+        data-tag-score={tagScore}
+        data-search-box-style={searchFormStyle}
     />
 )

@@ -10,7 +10,7 @@ import {
 } from '@wordpress/components'
 
 import { SearchBox } from 'react-instantsearch-dom';
-import { StaticRelatedItemEditComponent } from '../../blocks/StaticRelatedItems/block.interfaces';
+import { StaticRelatedItemEditComponent } from '../block.interfaces';
 const { useInstanceId } = require('@wordpress/compose')
 
 

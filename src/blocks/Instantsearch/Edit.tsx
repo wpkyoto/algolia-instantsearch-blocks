@@ -11,11 +11,12 @@ import { useEffect } from '@wordpress/element';
 import {InspectorControls, BlockControls } from '@wordpress/block-editor'
 import { HitItemVisibilityPanel } from '../../components/panel/HitItemVisibility';
 import { HitItemContentPanel } from '../../components/panel/HitItemContent';
-import { RelatedItemConfiguration } from '../../components/panel/RelatedItemConfig';
 import { ListLayoutControl } from '../../components/blockControls/ListLayout';
 import { AlgoliaInstantSearchWithClient } from '../../components/algolia/InstantSearch';
 import { InstantSearchEditComponent } from './block.interfaces';
 import  {ContainerHits} from './Frontend';
+import { SearchOption } from './components/SearchOptions';
+import { SearchBox } from '../../components/algolia/SearchForm';
 const { useEntityProp } = require('@wordpress/core-data');
 
 export const Edit: InstantSearchEditComponent = (props ) => {
@@ -43,9 +44,9 @@ export const Edit: InstantSearchEditComponent = (props ) => {
 			indexName={props.attributes.indexName}
 		>
 			<InspectorControls>
+				<SearchOption {...props} />
 				<HitItemVisibilityPanel {...props} />
 				<HitItemContentPanel {...props} />
-				<RelatedItemConfiguration {...props} />
 			</InspectorControls>
 			<BlockControls>
 				<ListLayoutControl {...props} />
@@ -53,6 +54,7 @@ export const Edit: InstantSearchEditComponent = (props ) => {
 			<Configure
 				hitsPerPage={hitsItems}
 			/>
+			<SearchBox ui={attributes.searchFormStyle} />
 			<ContainerHits attributes={attributes} />
 			{isUsingPaidPlan ? null: <PoweredBy />}
 		</AlgoliaInstantSearchWithClient>

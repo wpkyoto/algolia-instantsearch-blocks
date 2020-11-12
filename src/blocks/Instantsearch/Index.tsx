@@ -70,6 +70,10 @@ const initialAttributes: InstantSearchAttributeSettings = {
     },
     appId: {
         type: 'string',
+    },
+    searchFormStyle: {
+        type: 'string',
+        default: 'wordpress'
     }
 }
 

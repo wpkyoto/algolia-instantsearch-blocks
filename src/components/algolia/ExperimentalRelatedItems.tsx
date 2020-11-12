@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { useCallback } from 'react'
 import { ExperimentalConfigureRelatedItems } from 'react-instantsearch-dom';
 
 import { useSelect } from '@wordpress/data';
 
 import { useCurrentPostCategories, useCurrentPostTags } from '../../hooks/PostAttributes';
-import { StaticRelatedItemEditComponent } from '../../blocks/StaticRelatedItems/block.interfaces';
+import { GeneralEditComponent } from 'src/block.interfaces';
 
-export const ExperimentalRelatedItems: StaticRelatedItemEditComponent = (props) => {
+export const ExperimentalRelatedItems: GeneralEditComponent = (props) => {
 	const  { attributes }  = props;
 	const {
 		enableExperimentalRelatedItems,
