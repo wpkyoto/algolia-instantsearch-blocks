@@ -1,5 +1,5 @@
 import React, {createElement, FC, useMemo} from 'react'
-import { Configure, connectHits, PoweredBy} from 'react-instantsearch-dom';
+import { Configure, connectHits, PoweredBy, Stats} from 'react-instantsearch-dom';
 import { AlgoliaHit, HitItemVisibleConfig } from '../../block.interfaces';
 import { HitItems } from '../../components/algolia/Hits';
 import { AlgoliaInstantSearchWithClient } from '../../components/algolia/InstantSearch';
@@ -63,6 +63,13 @@ export const InstantsearchFrontend: FC = () => {
                 hitsPerPage={hitsItems}
             />
             <SearchBox ui={searchFormStyle} />
+            <Stats
+                translations={{
+                    stats(nbHits) {
+                        return `${nbHits} results found`
+                    }
+                }}
+            />
             <ContainerHits
                 attributes={hitAttributes}
             />
