@@ -1,4 +1,4 @@
-import React, {createElement, FC, useMemo} from 'react'
+import React, {createElement, FC } from 'react'
 import { Configure, connectHits, PoweredBy, Stats} from 'react-instantsearch-dom';
 import { AlgoliaHit, HitItemVisibleConfig } from '../../block.interfaces';
 import { HitItems } from '../../components/algolia/Hits';
@@ -9,50 +9,27 @@ type Props = {
     attributes: HitItemVisibleConfig
 }
 
-const getNumberAttribute = (element: HTMLElement, attributeName: string, fallback = 0): number => {
-    const attribute = element.getAttribute(attributeName)
-    if (!attribute) return fallback
-    return Number(attribute)
-}
-const getBooleanAttribute = (element: HTMLElement, attributeName: string, fallback = false): boolean => {
-    const attribute = element.getAttribute(attributeName)
-    if (!attribute) return fallback
-    return attribute === 'true'
+export type InstantsearchFrontendProps = {
+    appId?: string;
+    apiKey?: string;
+    indexName?: string;
+    hitsItems?: number;
+    hitAttributes: HitItemVisibleConfig;
+    searchFormStyle?: string;
+
 }
 
-
-export const InstantsearchFrontend: FC = () => {
-    const rootElement = document.getElementById('aib-instantsearch')
-    if (!rootElement) return null;
-    const {
-        appId,
-        apiKey,
-        indexName,
-        hitsItems,
-        hitAttributes,
-    } = useMemo(() => {
-        const hitItem: HitItemVisibleConfig = {
-            listLayout: rootElement.getAttribute('data-list-layout') === 'grid' ? 'grid' : 'list',
-            gridColumns: getNumberAttribute(rootElement, 'data-grid-columns', 3),
-            displayPostAuthor: getBooleanAttribute( rootElement, 'data-display-post-author'),
-            displayPostCategory: getBooleanAttribute( rootElement, 'data-display-post-categories'),
-            displayPostContentRadio: rootElement.getAttribute('data-display-post-content-type') || 'excerpt',
-            displayPostDate: getBooleanAttribute( rootElement, 'data-display-post-date'),
-            displayPostTags: getBooleanAttribute( rootElement, 'data-display-post-tags'),
-            excerptLength: getNumberAttribute(rootElement, 'data-excerpt-length', 55)
-        }
-        return {
-            appId: rootElement.getAttribute('data-app-id'),
-            apiKey: rootElement.getAttribute('data-searchonly-api-key'),
-            indexName: rootElement.getAttribute('data-index-name') || 'wp_posts_post',
-            hitsItems: getNumberAttribute(rootElement, 'data-hit-items', 10),
-            hitAttributes: hitItem,
-        }
-    }, [rootElement])
-    if (!apiKey || !appId) {
+export const InstantsearchFrontend: FC<InstantsearchFrontendProps> = ({
+    appId,
+    apiKey,
+    indexName,
+    hitsItems,
+    hitAttributes,
+    searchFormStyle,
+}) => {
+    if (!apiKey || !appId || !indexName) {
         return null;
     }
-    const searchFormStyle = rootElement.getAttribute('data-search-box-style') === 'algolia' ? 'algolia' : 'wordpress' as const
     return (
         <AlgoliaInstantSearchWithClient
             searchOnlyAPIKey={apiKey}
@@ -62,7 +39,7 @@ export const InstantsearchFrontend: FC = () => {
             <Configure
                 hitsPerPage={hitsItems}
             />
-            <SearchBox ui={searchFormStyle} />
+            <SearchBox ui={searchFormStyle === 'algolia' ? 'algolia' : 'wordpress'} />
             <Stats
                 translations={{
                     stats(nbHits) {

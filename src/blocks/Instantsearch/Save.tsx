@@ -24,7 +24,7 @@ export const Save: InstantSearchSaveComponent =  ({
     }
 }) => (
     <div
-        id="aib-instantsearch"
+        className="aib-instantsearch"
         data-app-id={appId}
         data-searchonly-api-key={searchOnlyApiKey}
         data-list-layout={listLayout}
