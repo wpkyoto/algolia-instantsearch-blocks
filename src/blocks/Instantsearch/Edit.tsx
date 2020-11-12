@@ -42,6 +42,7 @@ export const Edit: InstantSearchEditComponent = (props ) => {
 			appId={algoliaAppId}
 			searchOnlyAPIKey={algoliaSearchOnlyApiKey}
 			indexName={props.attributes.indexName}
+			stopTheFirstRun
 		>
 			<InspectorControls>
 				<SearchOption {...props} />

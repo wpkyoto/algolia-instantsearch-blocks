@@ -20,10 +20,11 @@ export type AlgoliaInstantSearchClientProps = {
 	searchOnlyAPIKey?: string;
 	appId?: string;
 	indexName: string;
+	stopTheFirstRun?: boolean;
 }
 
 export const AlgoliaInstantSearchWithClient: FC<PropsWithChildren<AlgoliaInstantSearchClientProps>> = ({
-	searchOnlyAPIKey, appId, indexName, children,
+	searchOnlyAPIKey, appId, indexName, children, stopTheFirstRun
 }) => {
 	const algoliaClient = useMemo(() => {
 		if (!appId || !searchOnlyAPIKey) return null;
@@ -47,6 +48,17 @@ export const AlgoliaInstantSearchWithClient: FC<PropsWithChildren<AlgoliaInstant
 		}
 		return {
 			search(requests: any) {
+				if (stopTheFirstRun && requests.every(({ params }: any) => !params.query)) {
+					return Promise.resolve({
+					  results: requests.map(() => ({
+						hits: [],
+						nbHits: 0,
+						nbPages: 0,
+						page: 0,
+						processingTimeMS: 0,
+					  })),
+					});
+				}
 				return algoliaClient.search(requests)
 			}
 		} as SearchClient
