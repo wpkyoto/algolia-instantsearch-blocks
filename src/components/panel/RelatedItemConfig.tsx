@@ -8,10 +8,11 @@ import { __ } from '@wordpress/i18n';
 import {
 	PanelBody, ToggleControl, RangeControl
 } from '@wordpress/components'
-import { EditComponent } from '../../block.interfaces';
+import { GeneralEditComponent } from '../../block.interfaces';
 
 
-export const RelatedItemConfiguration: EditComponent = ({attributes, setAttributes}) => {
+
+export const RelatedItemConfiguration: GeneralEditComponent = ({attributes, setAttributes}) => {
 	const { categoryScore, postTitleScore, tagScore, enableExperimentalRelatedItems } = attributes
     const handleEnableFeature = useCallback(() => {
         setAttributes({enableExperimentalRelatedItems: !enableExperimentalRelatedItems})

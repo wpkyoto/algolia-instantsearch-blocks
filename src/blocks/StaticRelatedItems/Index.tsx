@@ -11,14 +11,14 @@ import { registerBlockType } from '@wordpress/blocks';
  * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
  */
 import { __ } from '@wordpress/i18n';
+import { StaticRelatedItemAttributeSettings } from './block.interfaces';
 /**
  * Internal dependencies
  */
 import Edit from './edit';
 import Save from './save';
-import { CustomBlockAttributeSettings } from '../../block.interfaces';
 
-const initialAttributes: CustomBlockAttributeSettings = {
+const initialAttributes: StaticRelatedItemAttributeSettings = {
 	hits: {
 		type: 'array'
 	},

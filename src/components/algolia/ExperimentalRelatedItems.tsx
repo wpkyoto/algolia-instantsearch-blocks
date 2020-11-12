@@ -3,10 +3,11 @@ import { useCallback } from 'react'
 import { ExperimentalConfigureRelatedItems } from 'react-instantsearch-dom';
 
 import { useSelect } from '@wordpress/data';
-import { EditComponent } from '../../block.interfaces';
-import { useCurrentPostCategories, useCurrentPostTags } from '../../hooks/PostAttributes';
 
-export const ExperimentalRelatedItems: EditComponent = (props) => {
+import { useCurrentPostCategories, useCurrentPostTags } from '../../hooks/PostAttributes';
+import { StaticRelatedItemEditComponent } from '../../blocks/StaticRelatedItems/block.interfaces';
+
+export const ExperimentalRelatedItems: StaticRelatedItemEditComponent = (props) => {
 	const  { attributes }  = props;
 	const {
 		enableExperimentalRelatedItems,

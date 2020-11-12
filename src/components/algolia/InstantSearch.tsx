@@ -17,8 +17,8 @@ export const AlgoliaInstantSearch: FC<PropsWithChildren<{
 }
 
 export type AlgoliaInstantSearchClientProps = {
-	searchOnlyAPIKey: string;
-	appId: string;
+	searchOnlyAPIKey?: string;
+	appId?: string;
 	indexName: string;
 }
 

@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { BlockAttribute, BlockEditProps, BlockSaveProps } from '@wordpress/blocks';
+import { BlockEditProps, BlockSaveProps, BlockAttribute } from '@wordpress/blocks';
 import { Hit } from 'react-instantsearch-core';
 
 export type AlgoliaWPPost = {
@@ -24,44 +24,46 @@ export type AlgoliaWPPost = {
 	}
 }
 export type AlgoliaHit = Hit<AlgoliaWPPost>
+export type CustomBlockAttribute = BlockAttribute<any>
 
-export type CustomBlockAttributeSettings = {
-	readonly hits: BlockAttribute<any>;
-	readonly indexName: BlockAttribute<any>;
-	readonly displaySearchForm: BlockAttribute<any>;
-	readonly displayPostDate: BlockAttribute<any>;
-	readonly displayPostAuthor: BlockAttribute<any>;
-	readonly displayPostCategory: BlockAttribute<any>;
-	readonly displayPostTags: BlockAttribute<any>;
-	readonly isUsingPaidPlan: BlockAttribute<any>;
-	readonly displayPostContentRadio: BlockAttribute<any>;
-	readonly excerptLength: BlockAttribute<any>;
-	readonly enableExperimentalRelatedItems: BlockAttribute<any>;
-	readonly categoryScore: BlockAttribute<any>;
-	readonly tagScore: BlockAttribute<any>;
-	readonly postTitleScore: BlockAttribute<any>;
-	readonly hitsItems: BlockAttribute<any>;
-	readonly listLayout: BlockAttribute<any>;
-	readonly gridColumns: BlockAttribute<any>;
+export type PostDisplaySettingAttributes = {
+	readonly listLayout: CustomBlockAttribute;
+	readonly gridColumns: CustomBlockAttribute;
+	readonly displayPostDate: CustomBlockAttribute;
+	readonly displayPostAuthor: CustomBlockAttribute;
+	readonly displayPostCategory: CustomBlockAttribute;
+	readonly displayPostTags: CustomBlockAttribute;
+	readonly isUsingPaidPlan: CustomBlockAttribute;
+	readonly displayPostContentRadio: CustomBlockAttribute;
+	readonly excerptLength: CustomBlockAttribute;
 }
-export type CustomBlockAttributes = {
-	readonly hits?: Array<AlgoliaHit>
-	readonly indexName: string;
-	readonly displaySearchForm: boolean;
-	readonly isUsingPaidPlan: boolean;
+export type PostDisplayAttributes = {
+	readonly listLayout: 'grid' | 'list';
+	readonly gridColumns: number;
 	readonly displayPostDate: boolean;
 	readonly displayPostAuthor: boolean;
 	readonly displayPostCategory: boolean;
 	readonly displayPostTags: boolean;
 	readonly displayPostContentRadio: string;
 	readonly excerptLength: number;
+	readonly isUsingPaidPlan: boolean;
+}
+
+export type AlgoliaSearchSettingAttributes = {
+	readonly indexName: CustomBlockAttribute;
+	readonly enableExperimentalRelatedItems: CustomBlockAttribute;
+	readonly categoryScore: CustomBlockAttribute;
+	readonly tagScore: CustomBlockAttribute;
+	readonly postTitleScore: CustomBlockAttribute;
+	readonly hitsItems: CustomBlockAttribute;
+}
+export type AlgoliaSearchAttributes = {
+	readonly indexName: string;
 	readonly enableExperimentalRelatedItems: boolean;
 	readonly categoryScore: number;
 	readonly tagScore: number;
 	readonly postTitleScore: number;
 	readonly hitsItems: number;
-	readonly listLayout: 'grid' | 'list';
-	readonly gridColumns: number;
 }
 export type RelatedItemScoreAttribuets = 'categoryScore'
 | 'tagScore'
@@ -75,8 +77,11 @@ export type HitItemVisibleAttributes = 'displayPostAuthor'
 | 'listLayout'
 | 'gridColumns'
 
-export type HitItemVisibleConfig = Pick<CustomBlockAttributes, HitItemVisibleAttributes>
-export type EditComponentProps = BlockEditProps<CustomBlockAttributes>
-export type SaveComponentProps = BlockSaveProps<CustomBlockAttributes>
-export type EditComponent = FC<EditComponentProps>
-export type SaveComponent = FC<SaveComponentProps>
+export type HitItemVisibleConfig = Pick<PostDisplayAttributes & AlgoliaSearchAttributes, HitItemVisibleAttributes>
+
+export type GeneralAttributeSettings = PostDisplaySettingAttributes
+export type GeneralAttributes = PostDisplayAttributes & AlgoliaSearchAttributes
+export type GeneralEditComponentProps = BlockEditProps<GeneralAttributes>
+export type GeneralSaveComponentProps = BlockSaveProps<GeneralAttributes>
+export type GeneralEditComponent = FC<GeneralEditComponentProps>
+export type GeneralSaveComponent = FC<GeneralSaveComponentProps>

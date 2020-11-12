@@ -8,10 +8,11 @@ import { __ } from '@wordpress/i18n';
 import {
 	PanelBody, RadioControl, RangeControl
 } from '@wordpress/components'
-import { EditComponent } from '../../block.interfaces';
+import { GeneralEditComponent } from 'src/block.interfaces';
 
 
-export const HitItemContentPanel: EditComponent = ({attributes, setAttributes}) => {
+
+export const HitItemContentPanel: GeneralEditComponent = ({attributes, setAttributes}) => {
     const {
         displayPostContentRadio, excerptLength, listLayout, gridColumns
      } = attributes

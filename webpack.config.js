@@ -5,10 +5,11 @@ module.exports = {
 	...defaultConfig,
 	entry: {
 		index: path.resolve( process.cwd(), 'src', 'index.tsx' ),
+		front: path.resolve( process.cwd(), 'src', 'front.tsx' ),
 	},
 	resolve: {
 		...defaultConfig.resolve,
-		extensions: ['.ts', '.tsx', '.js']
+		extensions: [ '.ts', '.tsx', '.js' ],
 	},
 	module: {
 		...defaultConfig.module,
@@ -24,7 +25,8 @@ module.exports = {
 							// Babel uses a directory within local node_modules
 							// by default. Use the environment variable option
 							// to enable more persistent caching.
-							cacheDirectory: process.env.BABEL_CACHE_DIRECTORY || true,
+							cacheDirectory:
+								process.env.BABEL_CACHE_DIRECTORY || true,
 						},
 					},
 				],

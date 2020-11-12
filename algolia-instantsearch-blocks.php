@@ -15,7 +15,7 @@ class AIB_Blocks {
 		add_action( 'init', array( $this, 'configure_blocks' ) );
 		add_filter( 'block_categories', array( $this, 'configure_block_categories' ), 10, 1 );
 	}
-	public function configure_blocks() {
+	public function configure_admin_js() {
 		$dir = dirname( __FILE__ );
 	
 		$script_asset_path = "$dir/build/index.asset.php";
@@ -33,7 +33,29 @@ class AIB_Blocks {
 			$script_asset['version']
 		);
 		wp_set_script_translations( 'aib-algolia-instantsearch-blocks-block-editor', 'algolia-instantsearch-blocks' );
+	}
+	public function configure_frontend_js() {
+		$dir = dirname( __FILE__ );
 	
+		$script_asset_path = "$dir/build/front.asset.php";
+		if ( ! file_exists( $script_asset_path ) ) {
+			throw new Error(
+				'You need to run `npm start` or `npm run build` for the "aib/algolia-instantsearch-blocks" block first.'
+			);
+		}
+		$front_js     = 'build/front.js';
+		$script_asset = require( $script_asset_path );
+		wp_register_script(
+			'aib-algolia-instantsearch-blocks-frontend',
+			plugins_url( $front_js, __FILE__ ),
+			$script_asset['dependencies'],
+			$script_asset['version'],
+			true
+		);
+	}
+	public function configure_blocks() {
+		$this->configure_admin_js();
+		$this->configure_frontend_js();
 		wp_register_style(
 			'aib-algolia-instantsearch-style',
 			'https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/algolia-min.css'
@@ -42,6 +64,11 @@ class AIB_Blocks {
 		register_block_type( 'aib/static-related-items', array(
 			'editor_script' => 'aib-algolia-instantsearch-blocks-block-editor',
 		) );
+		register_block_type( 'aib/instantsearch', array(
+			'editor_script' => 'aib-algolia-instantsearch-blocks-block-editor',
+			'script' => 'aib-algolia-instantsearch-blocks-frontend',
+		) );
+		
 	}
 	public function configure_block_categories( $categories ) {
 		return array_merge(

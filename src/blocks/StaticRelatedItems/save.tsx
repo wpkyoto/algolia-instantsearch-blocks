@@ -6,9 +6,9 @@ import React from 'react'
  */
 import { __ } from '@wordpress/i18n';
 import { PoweredBy } from 'react-instantsearch-dom';
-import { SaveComponent } from '../../block.interfaces';
 import { HitItems } from '../../components/algolia/Hits';
 import { AlgoliaDummyInstantSearchClient } from '../../components/algolia/InstantSearch';
+import { StaticRelatedItemSaveComponent } from './block.interfaces';
 
 /**
  * The save function defines the way in which the different attributes should
@@ -19,7 +19,7 @@ import { AlgoliaDummyInstantSearchClient } from '../../components/algolia/Instan
  *
  * @return {WPElement} Element to render.
  */
-export const Save:SaveComponent = (props) => {
+export const Save:StaticRelatedItemSaveComponent = (props) => {
 	const { attributes } = props;
 	const { isUsingPaidPlan } = attributes
 	const hits = props.attributes.hits || []

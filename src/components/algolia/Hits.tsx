@@ -6,7 +6,8 @@ import {
 } from 'react-instantsearch-dom';
 import classNames from 'classnames';
 import { useEffect } from '@wordpress/element';
-import { EditComponentProps, AlgoliaHit, HitItemVisibleConfig } from '../../block.interfaces';
+import { AlgoliaHit, HitItemVisibleConfig } from '../../block.interfaces';
+import { StaticRelatedItemEditComponentProps as EditComponentProps } from '../../blocks/StaticRelatedItems/block.interfaces';
 import { HitItem } from './HitItem';
 import classnames from 'classnames';
 

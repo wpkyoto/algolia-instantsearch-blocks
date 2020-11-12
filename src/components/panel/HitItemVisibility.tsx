@@ -6,16 +6,17 @@ import React, { useCallback } from 'react'
  */
 import { __ } from '@wordpress/i18n';
 import {
-	PanelBody, ToggleControl, RangeControl, 
+	PanelBody, ToggleControl,
 } from '@wordpress/components'
-import { EditComponent } from '../../block.interfaces';
+import { GeneralEditComponent } from '../../block.interfaces';
 
 
-export const HitItemVisibilityPanel: EditComponent = ({attributes, setAttributes}) => {
+
+export const HitItemVisibilityPanel: GeneralEditComponent = ({attributes, setAttributes}) => {
     const {
         displayPostDate, displayPostAuthor,
          displayPostCategory, displayPostTags,
-         isUsingPaidPlan, hitsItems
+         isUsingPaidPlan,
      } = attributes
 	const handleDisplayPostDate = useCallback(() => {
 		setAttributes({

@@ -8,10 +8,11 @@ import { __ } from '@wordpress/i18n';
 import {
 	Toolbar
 } from '@wordpress/components';
-import { EditComponent } from '../../block.interfaces';
+import { GeneralEditComponent } from '../../block.interfaces';
+
 const {ToolbarGroup} = require('@wordpress/components')
 
-export const ListLayoutControl: EditComponent = (props ) => {
+export const ListLayoutControl: GeneralEditComponent = (props ) => {
 	const  { setAttributes, attributes }  = props;
 	const {
 		listLayout

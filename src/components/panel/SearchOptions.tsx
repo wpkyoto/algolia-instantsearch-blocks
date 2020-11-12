@@ -8,12 +8,13 @@ import { __ } from '@wordpress/i18n';
 import {
 	PanelBody, ToggleControl, RangeControl, TextControl, Icon, Button, BaseControl
 } from '@wordpress/components'
-import { EditComponent } from '../../block.interfaces';
+
 import { SearchBox } from 'react-instantsearch-dom';
+import { StaticRelatedItemEditComponent } from '../../blocks/StaticRelatedItems/block.interfaces';
 const { useInstanceId } = require('@wordpress/compose')
 
 
-export const SearchOption: EditComponent = ({attributes, setAttributes}) => {
+export const SearchOption: StaticRelatedItemEditComponent = ({attributes, setAttributes}) => {
 	const { displaySearchForm, hitsItems, indexName } = attributes
     const [tmpIndexName, changeIndexName] = useState(indexName)
 	const handleDisplaySearchForm = useCallback(() => {
