@@ -53,13 +53,22 @@ class AIB_Blocks {
 			true
 		);
 	}
-	public function configure_blocks() {
-		$this->configure_admin_js();
-		$this->configure_frontend_js();
-		wp_register_style(
+
+	public function configure_common_assets() {
+		wp_enqueue_style(
+			'aib-algolia-instantsearch-reset-style',
+			'https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/reset-min.css'
+		);
+		wp_enqueue_style(
 			'aib-algolia-instantsearch-style',
 			'https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/algolia-min.css'
 		);
+
+	}
+	public function configure_blocks() {
+		$this->configure_admin_js();
+		$this->configure_frontend_js();
+		// $this->configure_common_assets();
 	
 		register_block_type( 'aib/static-related-items', array(
 			'editor_script' => 'aib-algolia-instantsearch-blocks-block-editor',
