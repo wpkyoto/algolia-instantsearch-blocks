@@ -6,9 +6,9 @@ import React from 'react'
  */
 import { __ } from '@wordpress/i18n';
 import { PoweredBy } from 'react-instantsearch-dom';
-import { SaveComponent } from './block.interfaces';
-import { HitItems } from './components/algolia/Hits';
-import { AlgoliaDummyInstantSearchClient } from './components/algolia/InstantSearch';
+import { SaveComponent } from '../../block.interfaces';
+import { HitItems } from '../../components/algolia/Hits';
+import { AlgoliaDummyInstantSearchClient } from '../../components/algolia/InstantSearch';
 
 /**
  * The save function defines the way in which the different attributes should

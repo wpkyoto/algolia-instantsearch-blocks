@@ -27,7 +27,6 @@ export type AlgoliaHit = Hit<AlgoliaWPPost>
 
 export type CustomBlockAttributeSettings = {
 	readonly hits: BlockAttribute<any>;
-	readonly categories: BlockAttribute<any>;
 	readonly indexName: BlockAttribute<any>;
 	readonly displaySearchForm: BlockAttribute<any>;
 	readonly displayPostDate: BlockAttribute<any>;
@@ -47,10 +46,6 @@ export type CustomBlockAttributeSettings = {
 }
 export type CustomBlockAttributes = {
 	readonly hits?: Array<AlgoliaHit>
-	readonly categories?:Array<{
-		name: string;
-		id: number;
-	}>
 	readonly indexName: string;
 	readonly displaySearchForm: boolean;
 	readonly isUsingPaidPlan: boolean;
