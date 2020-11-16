@@ -27,3 +27,4 @@ node_modules/
 .env
 build/
 *.zip
+.wp-env.json
