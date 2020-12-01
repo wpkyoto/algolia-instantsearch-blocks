@@ -1,57 +1,49 @@
-=== Algolia Instantsearch Blocks ===
-Contributors:      The WordPress Contributors
-Tags:              block
-Requires at least: 5.5.0
-Tested up to:      5.5.1
-Stable tag:        0.1.0
-Requires PHP:      7.0.0
+=== Search with Algolia Instantsearch Blocks ===
+Contributors:      hideokamoto
+Tags:              block, algolia, instantsearch
+Requires at least: 5.5
+Tested up to: 5.5.3
+Requires PHP: 7.2
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-Example block written with ESNext standard and JSX support – build step required.
+Adding algolia backend search feature to the block editor.
 
 == Description ==
+This plugin provides two features:
 
-This is the long description. No limit, and you can use Markdown (as well as in the following sections).
+- Site search form and its result block.
+- List of related items block.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+=== Static related items block ===
+Add site search form and its result block in anywhere
+
+This custom block displays most related posts with title, tags and categories. Every time you save changes on the post, the plugin also saves search results to WordPress database, so no additional API calls occur on the frontend.  
+Applying the latest related posts to the posts, you should edit a post and re-save changes, and thanks for this, it has a considerable advantage: the minimum API calls.  
+Also, you can handle anything, such as keyword filtering or numbers of posts to display.
+
+=== Instant search block ===
+Add a list of related posts block.
+This custom bock displays the site search form and its result page. Simple and easy to use instant search block which is fully customisable (numbers of result, contents of list and its form style ).
+
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
+=== Indexing data ===
+- Install WP Search with Algolia ( https://wordpress.org/plugins/wp-search-with-algolia/ )
+- Get API keys from Algolia search
+- Indexing data to Algolia
+- That's all
 
-e.g.
+=== Embedding search form ===
+- Install or upload this plugin on the plugin page in WordPress dashboard
+- Input Algolia's App ID/API Key in Setting => Reading menu.
+- Add `Static Related Items` and `Instantsearch`block to the posts or pages.
+- Modify numbers of suggests in the posts or indexing
+- Save changes and publish it.
 
-1. Upload the plugin files to the `/wp-content/plugins/algolia-instantsearch-blocks` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
-
-
-== Frequently Asked Questions ==
-
-= A question that someone might have =
-
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
-
-== Screenshots ==
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
 
 == Changelog ==
 
 = 0.1.0 =
 * Release
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above. This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation." Arbitrary sections will be shown below the built-in sections outlined above.

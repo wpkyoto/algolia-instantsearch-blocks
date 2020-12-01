@@ -1,9 +1,10 @@
 <?php
 /**
- * Plugin Name:     Algolia Instantsearch Blocks
- * Description:     Example block written with ESNext standard and JSX support – build step required.
+ * Plugin Name:     Search with Algolia Instantsearch Blocks
+ * Description:     Adding algolia backend search feature to the block editor.
  * Version:         0.1.0
- * Author:          The WordPress Contributors
+ * Author:          DigitalCube Inc. 
+ * Author URI:      http://en.digitalcube.jp/
  * License:         GPL-2.0-or-later
  * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:     algolia-instantsearch-blocks
@@ -138,7 +139,7 @@ class AIB_Settings {
 	}
 
 	public function algolia_setting_description() {
-		_e( 'Algolia Instantsearch Blocksの設定を行います。', 'algolia-instantsearch-blocks' );
+		_e( 'Set block configurations.', 'algolia-instantsearch-blocks' );
 	}
 
 	public function algolia_app_id_option() {
