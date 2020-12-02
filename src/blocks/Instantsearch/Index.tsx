@@ -79,10 +79,10 @@ const initialAttributes: InstantSearchAttributeSettings = {
 
 export const registerInstantsearchBlock = () => {
     registerBlockType( 'aib/instantsearch', {
-        title: __( 'Instantsearch', 'algolia-instantsearch-blocks' ),
+        title: __( 'Instantsearch', 'search-with-algolia-instantsearch-blocks' ),
         description: __(
-            'Instantsearch formと検索結果を表示するブロックです。',
-            'algolia-instantsearch-blocks'
+            'Show Algolia Instantsearch form and the results',
+            'search-with-algolia-instantsearch-blocks'
         ),
         category: 'aib',
         icon: 'search',

@@ -99,7 +99,7 @@ export const registerStaticRelatedItemBlock = () => {
 		 * This is the display title for your block, which can be translated with `i18n` functions.
 		 * The block inserter will show this name.
 		 */
-		title: __( 'Static Related Items', 'algolia-instantsearch-blocks' ),
+		title: __( 'Static Related Items', 'search-with-algolia-instantsearch-blocks' ),
 
 		/**
 		 * This is a short description for your block, can be translated with `i18n` functions.
@@ -107,7 +107,7 @@ export const registerStaticRelatedItemBlock = () => {
 		 */
 		description: __(
 			'現在の記事と関連性の高い記事リストを、記事内に保存できるブロックです。Staticに保存するため、記事更新時のみデータが更新されます。',
-			'algolia-instantsearch-blocks'
+			'search-with-algolia-instantsearch-blocks'
 		),
 
 		/**
