@@ -1,0 +1,18 @@
+name: Test
+on: [push]
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Build
+      run: |
+        node -v
+        npm --version
+        npm install
+        rm -rf node_modules/@types/algoliasearch-helper
+        npm run build
+        wget https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/reset-min.css -P build  
+        wget https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/algolia-min.css -P build  
