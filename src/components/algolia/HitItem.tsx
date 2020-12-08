@@ -78,7 +78,7 @@ export const HitItem: FC<{
 		<Content hit={hit} attributes={{displayPostContentRadio, excerptLength}} />
         {hit.taxonomies ? (
             <>
-                {displayPostTags && hit.taxonomies.category ? (
+                {displayPostCategory && hit.taxonomies.category ? (
                     <div className="wp-block-latest-posts__post-author" style={{
                         marginBottom: !!hit.taxonomies.post_tag ? '0': '16px'
                     }}>
@@ -88,7 +88,7 @@ export const HitItem: FC<{
                         ))}
                     </div>
                 ): null}
-                {displayPostCategory && hit.taxonomies.post_tag ? (
+                {displayPostTags && hit.taxonomies.post_tag ? (
                     <div className="wp-block-latest-posts__post-author" style={{
                         marginBottom: '16px'
                     }}>
