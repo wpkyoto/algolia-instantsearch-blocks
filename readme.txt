@@ -45,5 +45,8 @@ This custom bock displays the site search form and its result page. Simple and e
 
 == Changelog ==
 
+= 0.1.4 =
+* [Bug fix] Tag / Category visibility
+
 = 0.1.0 =
 * Release

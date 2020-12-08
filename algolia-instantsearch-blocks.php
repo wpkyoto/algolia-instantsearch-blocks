@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Search with Algolia Instantsearch Blocks
  * Description:     Adding algolia backend search feature to the block editor.
- * Version:         0.1.0
+ * Version:         0.1.4
  * Author:          DigitalCube Inc. 
  * Author URI:      http://en.digitalcube.jp/
  * License:         GPL-2.0-or-later
