@@ -3,7 +3,7 @@ import { BlockEditProps, BlockSaveProps } from '@wordpress/blocks';
 import { AlgoliaHit, AlgoliaSearchAttributes, AlgoliaSearchSettingAttributes, CustomBlockAttribute, PostDisplayAttributes, PostDisplaySettingAttributes } from "../../block.interfaces"
 
 export type StaticRelatedItemAttributeSettings = PostDisplaySettingAttributes &
-AlgoliaSearchSettingAttributes &  {
+Omit<AlgoliaSearchSettingAttributes, 'autoFocus'> &  {
 	readonly hits: CustomBlockAttribute;
 	readonly displaySearchForm: CustomBlockAttribute;
 }

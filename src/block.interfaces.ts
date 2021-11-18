@@ -56,6 +56,7 @@ export type AlgoliaSearchSettingAttributes = {
 	readonly tagScore: CustomBlockAttribute;
 	readonly postTitleScore: CustomBlockAttribute;
 	readonly hitsItems: CustomBlockAttribute;
+	readonly autoFocus: CustomBlockAttribute;
 }
 export type AlgoliaSearchAttributes = {
 	readonly indexName: string;
@@ -64,6 +65,7 @@ export type AlgoliaSearchAttributes = {
 	readonly tagScore: number;
 	readonly postTitleScore: number;
 	readonly hitsItems: number;
+	readonly autoFocus?: boolean;
 }
 export type RelatedItemScoreAttribuets = 'categoryScore'
 | 'tagScore'

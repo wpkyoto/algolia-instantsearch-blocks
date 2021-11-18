@@ -21,6 +21,7 @@ export const Save: InstantSearchSaveComponent =  ({
         tagScore,
         searchFormStyle,
         hitsItems,
+        autoFocus,
     }
 }) => (
     <div
@@ -42,5 +43,6 @@ export const Save: InstantSearchSaveComponent =  ({
         data-tag-score={tagScore}
         data-search-box-style={searchFormStyle}
         data-hit-items={hitsItems}
+        data-auto-focus={autoFocus}
     />
 )

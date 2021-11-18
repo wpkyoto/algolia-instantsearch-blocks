@@ -1,7 +1,8 @@
 import React, {FC, useCallback, useMemo, useState} from 'react'
 import { connectSearchBox, SearchBox as AlgoliaSearchBox} from 'react-instantsearch-dom'
 
-export const WordPressStyledSearchBox = connectSearchBox(({currentRefinement, refine }) => {
+export const WordPressStyledSearchBox = connectSearchBox(({currentRefinement, refine, ...props }) => {
+    const autoFocus = (props as any).autoFocus || false
     const [searchWord, updateSearchWord] = useState(currentRefinement)
     const handleSubmit = useCallback((event) => {
         event.preventDefault()
@@ -21,6 +22,7 @@ export const WordPressStyledSearchBox = connectSearchBox(({currentRefinement, re
                         value={searchWord}
                         onChange={handleOnChange}
                         name="s"
+                        autoFocus={autoFocus}
                     />
                 </label>
                 <input type="submit" className="search-submit" value="Search" />
@@ -31,7 +33,8 @@ export const WordPressStyledSearchBox = connectSearchBox(({currentRefinement, re
 
 export const SearchBox: FC<{
     ui?: 'algolia' | 'wordpress'
+    autoFocus?: boolean;
 }> = (props) => {
-    if (props.ui === 'algolia') return <AlgoliaSearchBox />
-    return <WordPressStyledSearchBox />
+    if (props.ui === 'algolia') return <AlgoliaSearchBox {...props} />
+    return <WordPressStyledSearchBox {...props} />
 }
