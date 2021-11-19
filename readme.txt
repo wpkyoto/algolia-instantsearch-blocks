@@ -2,7 +2,7 @@
 Contributors:      hideokamoto
 Tags:              block, algolia, instantsearch
 Requires at least: 5.5
-Tested up to: 5.5.3
+Tested up to: 5.8.2
 Requires PHP: 7.2
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -44,6 +44,9 @@ This custom bock displays the site search form and its result page. Simple and e
 
 
 == Changelog ==
+
+= 0.2.0 =
+* [Feature] Support auto-complete attribute
 
 = 0.1.4 =
 * [Bug fix] Tag / Category visibility
