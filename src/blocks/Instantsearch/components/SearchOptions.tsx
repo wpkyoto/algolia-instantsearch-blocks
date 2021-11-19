@@ -6,7 +6,7 @@ import React, { useCallback, useState } from 'react'
  */
 import { __ } from '@wordpress/i18n';
 import {
-	PanelBody, RangeControl, TextControl, Button, BaseControl, SelectControl
+	PanelBody, RangeControl, TextControl, Button, BaseControl, SelectControl, ToggleControl
 } from '@wordpress/components'
 import { InstantSearchEditComponent } from '../block.interfaces';
 const { useInstanceId } = require('@wordpress/compose')
@@ -52,10 +52,13 @@ export const SearchOption: InstantSearchEditComponent = (props) => {
 	const { attributes:{
         hitsItems,
         searchFormStyle,
+        autoFocus,
     }, setAttributes } = props
     const handleUpdateHitItems = useCallback((value) => {
         setAttributes({hitsItems: value})
     }, [setAttributes])
+
+    console.log({autoFocus})
     return (
         <PanelBody title={__('Search Option')}>
             <IndexName {...props} />
@@ -76,6 +79,15 @@ export const SearchOption: InstantSearchEditComponent = (props) => {
                     label: 'Algolia'
                 }]}
                 onChange={(value) => setAttributes({searchFormStyle: value})}
+            />
+            <ToggleControl
+                label={__('Auto focus')}
+                checked={autoFocus}
+                onChange={() => {
+                    setAttributes({
+                        autoFocus: !autoFocus
+                    })
+                }}
             />
         </PanelBody>
     )

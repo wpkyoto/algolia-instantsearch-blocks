@@ -16,7 +16,7 @@ export type InstantsearchFrontendProps = {
     hitsItems?: number;
     hitAttributes: HitItemVisibleConfig;
     searchFormStyle?: string;
-
+    autoFocus?: boolean;
 }
 
 export const InstantsearchFrontend: FC<InstantsearchFrontendProps> = ({
@@ -26,6 +26,7 @@ export const InstantsearchFrontend: FC<InstantsearchFrontendProps> = ({
     hitsItems,
     hitAttributes,
     searchFormStyle,
+    autoFocus,
 }) => {
     if (!apiKey || !appId || !indexName) {
         return null;
@@ -39,7 +40,10 @@ export const InstantsearchFrontend: FC<InstantsearchFrontendProps> = ({
             <Configure
                 hitsPerPage={hitsItems}
             />
-            <SearchBox ui={searchFormStyle === 'algolia' ? 'algolia' : 'wordpress'} />
+            <SearchBox
+                ui={searchFormStyle === 'algolia' ? 'algolia' : 'wordpress'}
+                autoFocus={autoFocus}    
+            />
             <Stats
                 translations={{
                     stats(nbHits) {

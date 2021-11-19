@@ -74,7 +74,11 @@ const initialAttributes: InstantSearchAttributeSettings = {
     searchFormStyle: {
         type: 'string',
         default: 'wordpress'
-    }
+    },
+	autoFocus: {
+		type: 'boolean',
+		default: false,
+	}
 }
 
 export const registerInstantsearchBlock = () => {

@@ -30,6 +30,7 @@ function renderAllIfItemExists<Props = undefined>(elementClassName: string, elem
             excerptLength: getNumberAttribute(target, 'data-excerpt-length', 55)
         }
         const props: InstantsearchFrontendProps = {
+            autoFocus: getBooleanAttribute( target, 'data-auto-focus'),
             appId: target.getAttribute('data-app-id') || undefined,
             apiKey: target.getAttribute('data-searchonly-api-key') || undefined,
             indexName: target.getAttribute('data-index-name') || 'wp_posts_post',
