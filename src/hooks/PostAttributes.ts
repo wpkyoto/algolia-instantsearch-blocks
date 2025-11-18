@@ -2,11 +2,11 @@ import { useSelect } from '@wordpress/data';
 
 export const useCurrentPostCategories = () => {
 	const categoryIds = useSelect(select => {
-		return select('core/editor').getEditedPostAttribute<number[]>('categories')
+		return (select('core/editor') as any).getEditedPostAttribute('categories') as number[]
 	}, [])
 	return useSelect((select) => {
-		const {getEntityRecords} = select('core')
-		const taxonomies = getEntityRecords<Array<{id: number; name: string;}>>('taxonomy', 'category')
+		const {getEntityRecords} = (select('core') as any)
+		const taxonomies = getEntityRecords('taxonomy', 'category') as Array<{id: number; name: string;}>
 		if (!taxonomies) return []
 		const currentCategories = taxonomies.filter(taxonomy => {
 			return categoryIds.includes(taxonomy.id)
@@ -17,11 +17,11 @@ export const useCurrentPostCategories = () => {
 
 export const useCurrentPostTags = () => {
 	const tagIds = useSelect(select => {
-		return select('core/editor').getEditedPostAttribute<number[]>('tags')
+		return (select('core/editor') as any).getEditedPostAttribute('tags') as number[]
 	}, [])
 	return useSelect((select) => {
-		const {getEntityRecords} = select('core')
-		const taxonomies = getEntityRecords<Array<{id: number; name: string;}>>('taxonomy', 'post_tag')
+		const {getEntityRecords} = (select('core') as any)
+		const taxonomies = getEntityRecords('taxonomy', 'post_tag') as Array<{id: number; name: string;}>
 		if (!taxonomies) return []
 		const currentTags = taxonomies.filter(taxonomy => {
 			return tagIds.includes(taxonomy.id)

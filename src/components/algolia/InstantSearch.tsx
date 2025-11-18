@@ -6,13 +6,14 @@ export const AlgoliaInstantSearch: FC<PropsWithChildren<{
     searchClient: SearchClient
     indexName: string;
 }>> = ({children, searchClient, indexName}) => {
+	const InstantSearchComponent = InstantSearch as any;
 	return (
-		<InstantSearch
+		<InstantSearchComponent
 			searchClient={searchClient}
 			indexName={indexName}
 		>
 			{children}
-		</InstantSearch>
+		</InstantSearchComponent>
 	)
 }
 

@@ -15,7 +15,7 @@ const getBooleanAttribute = (element: HTMLElement, attributeName: string, fallba
 }
 
 
-function renderAllIfItemExists<Props = undefined>(elementClassName: string, element: FC<Props>): void {
+function renderAllIfItemExists<Props>(elementClassName: string, element: FC<Props>): void {
     const targets = document.querySelectorAll<HTMLElement>(elementClassName)
     if (!targets) return;
     targets.forEach((target) => {
@@ -38,7 +38,7 @@ function renderAllIfItemExists<Props = undefined>(elementClassName: string, elem
             hitAttributes: hitItem,
             searchFormStyle: target.getAttribute('data-search-box-style') || undefined,
         }
-        render(createElement(element, props as any), target)
+        render(createElement<Props>(element as any, props as any), target)
     })
 }
 renderAllIfItemExists<InstantsearchFrontendProps>('.aib-instantsearch', InstantsearchFrontend)
