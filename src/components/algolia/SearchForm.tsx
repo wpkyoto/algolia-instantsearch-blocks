@@ -35,6 +35,6 @@ export const SearchBox: FC<{
     ui?: 'algolia' | 'wordpress'
     autoFocus?: boolean;
 }> = (props) => {
-    if (props.ui === 'algolia') return <AlgoliaSearchBox {...props} />
-    return <WordPressStyledSearchBox {...props} />
+    if (props.ui === 'algolia') return <AlgoliaSearchBox {...props as any} />
+    return <WordPressStyledSearchBox {...props as any} />
 }

@@ -49,7 +49,7 @@ export const Edit: InstantSearchEditComponent = (props ) => {
 				<HitItemVisibilityPanel {...props} />
 				<HitItemContentPanel {...props} />
 			</InspectorControls>
-			<BlockControls>
+			<BlockControls {...({ group: "block" } as any)}>
 				<ListLayoutControl {...props} />
 			</BlockControls>
 			<Configure

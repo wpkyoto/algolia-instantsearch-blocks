@@ -35,9 +35,7 @@ export const ListLayoutControl: GeneralEditComponent = (props ) => {
         ];
     }, [listLayout])
 	return (
-        <Toolbar label="List view">
-            <ToolbarGroup controls={ layoutControls } />
-        </Toolbar>
+        <ToolbarGroup controls={ layoutControls } />
 	);
 }
 

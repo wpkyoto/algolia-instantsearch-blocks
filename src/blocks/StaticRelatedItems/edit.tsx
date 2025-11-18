@@ -37,7 +37,7 @@ export const Edit: StaticRelatedItemEditComponent = (props ) => {
 				<HitItemContentPanel {...props} />
 				<RelatedItemConfiguration {...props} />
 			</InspectorControls>
-			<BlockControls>
+			<BlockControls {...({ group: "block" } as any)}>
 				<ListLayoutControl {...props} />
 			</BlockControls>
 			<Configure

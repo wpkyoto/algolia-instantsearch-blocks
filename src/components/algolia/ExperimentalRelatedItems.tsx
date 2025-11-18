@@ -16,7 +16,7 @@ export const ExperimentalRelatedItems: GeneralEditComponent = (props) => {
 
 	const categories = useCurrentPostCategories()
 	const tags = useCurrentPostTags()
-	const postTitle = useSelect(select => select('core/editor').getEditedPostAttribute('title'))
+	const postTitle = useSelect(select => (select('core/editor') as any).getEditedPostAttribute('title'))
 
 	const transformSearchParameters = useCallback(param => {
 		if (categoryScore > 0) {
