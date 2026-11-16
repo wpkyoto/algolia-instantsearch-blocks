@@ -1,34 +1,27 @@
-import React from 'react'
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
- */
-import { __ } from '@wordpress/i18n';
-import { PoweredBy } from 'react-instantsearch-dom';
+import React from 'react';
 import { HitItems } from '../../components/algolia/Hits';
-import { AlgoliaDummyInstantSearchClient } from '../../components/algolia/InstantSearch';
+import { LegacyPoweredBy } from '../../components/algolia/LegacyPoweredBy';
 import { StaticRelatedItemSaveComponent } from './block.interfaces';
 
 /**
- * The save function defines the way in which the different attributes should
- * be combined into the final markup, which is then serialized by the block
- * editor into `post_content`.
+ * Saves the related posts as static HTML.
  *
- * @see https://developer.wordpress.org/block-editor/developers/block-api/block-edit-save/#save
+ * The output must stay byte-identical to version 0.2.0 (which used
+ * react-instantsearch-dom 6). It does not use React InstantSearch at all:
+ * there is no search at render time, only stored hits.
  *
- * @return {WPElement} Element to render.
+ * @param props Block save props.
  */
-export const Save:StaticRelatedItemSaveComponent = (props) => {
+export const Save: StaticRelatedItemSaveComponent = ( props ) => {
 	const { attributes } = props;
-	const { isUsingPaidPlan } = attributes
-	const hits = props.attributes.hits || []
+	const { isUsingPaidPlan } = attributes;
+	const hits = attributes.hits || [];
 	return (
-		<AlgoliaDummyInstantSearchClient>
-			<HitItems hits={hits} attributes={attributes} /> 
-			{isUsingPaidPlan ? null : <PoweredBy />}
-			</AlgoliaDummyInstantSearchClient>
+		<>
+			<HitItems hits={ hits } attributes={ attributes } />
+			{ isUsingPaidPlan ? null : <LegacyPoweredBy /> }
+		</>
 	);
-}
+};
 
-export default Save
+export default Save;

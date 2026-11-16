@@ -1,9 +1,9 @@
 === Search with Algolia Instantsearch Blocks ===
 Contributors:      hideokamoto
 Tags:              block, algolia, instantsearch
-Requires at least: 5.5
-Tested up to: 5.8.2
-Requires PHP: 7.2
+Requires at least: 6.6
+Tested up to:      7.1
+Requires PHP:      7.4
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,14 @@ This custom bock displays the site search form and its result page. Simple and e
 
 
 == Changelog ==
+
+= Unreleased =
+* [Compatibility] Tested up to WordPress 7.1. Requires WordPress 6.6+ and PHP 7.4+.
+* [Update] Migrated from the deprecated react-instantsearch-dom (v6) to React InstantSearch v7 and algoliasearch v5.
+* [Update] Updated the build toolchain (@wordpress/scripts 37, TypeScript 5, Node.js 22).
+* [Bug fix] Use the `block_categories_all` filter instead of the deprecated `block_categories` filter.
+* [Bug fix] Front-end search blocks are rendered with `createRoot` (React 18+).
+* Blocks saved with 0.2.0 stay valid: the saved HTML of the Static Related Items block is unchanged.
 
 = 0.2.0 =
 * [Feature] Support auto-complete attribute

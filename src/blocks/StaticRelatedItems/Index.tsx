@@ -20,11 +20,11 @@ import Save from './save';
 
 const initialAttributes: StaticRelatedItemAttributeSettings = {
 	hits: {
-		type: 'array'
+		type: 'array',
 	},
 	indexName: {
 		type: 'string',
-		default: 'wp_posts_post'
+		default: 'wp_posts_post',
 	},
 	displaySearchForm: {
 		type: 'boolean',
@@ -51,11 +51,11 @@ const initialAttributes: StaticRelatedItemAttributeSettings = {
 		default: true,
 	},
 	displayPostContentRadio: {
-		type: "string",
-		default: "excerpt"
+		type: 'string',
+		default: 'excerpt',
 	},
 	excerptLength: {
-		type: "number",
+		type: 'number',
 		default: 55,
 	},
 	enableExperimentalRelatedItems: {
@@ -63,30 +63,30 @@ const initialAttributes: StaticRelatedItemAttributeSettings = {
 		default: true,
 	},
 	categoryScore: {
-		type: "number",
+		type: 'number',
 		default: 1,
 	},
 	tagScore: {
-		type: "number",
+		type: 'number',
 		default: 1,
 	},
 	postTitleScore: {
-		type: "number",
+		type: 'number',
 		default: 1,
 	},
 	hitsItems: {
-		type: "number",
-		default: 10
+		type: 'number',
+		default: 10,
 	},
 	listLayout: {
 		type: 'string',
-		default: 'list'
+		default: 'list',
 	},
 	gridColumns: {
 		type: 'number',
 		default: 3,
-	}
-}
+	},
+};
 
 export const registerStaticRelatedItemBlock = () => {
 	/**
@@ -99,7 +99,10 @@ export const registerStaticRelatedItemBlock = () => {
 		 * This is the display title for your block, which can be translated with `i18n` functions.
 		 * The block inserter will show this name.
 		 */
-		title: __( 'Static Related Items', 'search-with-algolia-instantsearch-blocks' ),
+		title: __(
+			'Static Related Items',
+			'search-with-algolia-instantsearch-blocks'
+		),
 
 		/**
 		 * This is a short description for your block, can be translated with `i18n` functions.
@@ -137,4 +140,4 @@ export const registerStaticRelatedItemBlock = () => {
 
 		save: Save,
 	} );
-}
+};

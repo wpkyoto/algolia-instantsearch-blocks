@@ -1,31 +1,40 @@
+import { useMemo } from 'react';
 import { useSelect } from '@wordpress/data';
 
-export const useCurrentPostCategories = () => {
-	const categoryIds = useSelect(select => {
-		return (select('core/editor') as any).getEditedPostAttribute('categories') as number[]
-	}, [])
-	return useSelect((select) => {
-		const {getEntityRecords} = (select('core') as any)
-		const taxonomies = getEntityRecords('taxonomy', 'category') as Array<{id: number; name: string;}>
-		if (!taxonomies) return []
-		const currentCategories = taxonomies.filter(taxonomy => {
-			return categoryIds.includes(taxonomy.id)
-		})
-		return currentCategories
-	}, [categoryIds])
-}
+type Term = { id: number; name: string };
 
-export const useCurrentPostTags = () => {
-	const tagIds = useSelect(select => {
-		return (select('core/editor') as any).getEditedPostAttribute('tags') as number[]
-	}, [])
-	return useSelect((select) => {
-		const {getEntityRecords} = (select('core') as any)
-		const taxonomies = getEntityRecords('taxonomy', 'post_tag') as Array<{id: number; name: string;}>
-		if (!taxonomies) return []
-		const currentTags = taxonomies.filter(taxonomy => {
-			return tagIds.includes(taxonomy.id)
-		})
-		return currentTags
-	}, [tagIds])
-}
+const useCurrentPostTerms = (
+	postAttribute: 'categories' | 'tags',
+	taxonomy: 'category' | 'post_tag'
+): Term[] => {
+	const termIds: number[] | undefined = useSelect(
+		( select ) =>
+			( select( 'core/editor' ) as any )?.getEditedPostAttribute?.(
+				postAttribute
+			),
+		[ postAttribute ]
+	);
+	const terms: Term[] | null = useSelect(
+		( select ) =>
+			( select( 'core' ) as any ).getEntityRecords(
+				'taxonomy',
+				taxonomy,
+				{
+					per_page: -1,
+				}
+			),
+		[ taxonomy ]
+	);
+	return useMemo( () => {
+		if ( ! terms || ! Array.isArray( termIds ) ) {
+			return [];
+		}
+		return terms.filter( ( term ) => termIds.includes( term.id ) );
+	}, [ terms, termIds ] );
+};
+
+export const useCurrentPostCategories = () =>
+	useCurrentPostTerms( 'categories', 'category' );
+
+export const useCurrentPostTags = () =>
+	useCurrentPostTerms( 'tags', 'post_tag' );
