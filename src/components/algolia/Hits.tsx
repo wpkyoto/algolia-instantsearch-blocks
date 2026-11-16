@@ -1,64 +1,67 @@
-import React , {FC} from 'react'
-import { __ } from '@wordpress/i18n';
-import {
-    connectHits,
-	createClassNames,
-} from 'react-instantsearch-dom';
-import classNames from 'classnames';
-import { useEffect } from '@wordpress/element';
+import React, { FC, useEffect } from 'react';
+import classnames from 'classnames';
+import { useHits } from 'react-instantsearch';
 import { AlgoliaHit, HitItemVisibleConfig } from '../../block.interfaces';
 import { StaticRelatedItemEditComponentProps as EditComponentProps } from '../../blocks/StaticRelatedItems/block.interfaces';
 import { HitItem } from './HitItem';
-import classnames from 'classnames';
 
-export const HitItems: FC<{
-    hits: AlgoliaHit[];
+/**
+ * Renders the hit list.
+ *
+ * The class names (`ais-Hits`, `ais-Hits-list`, `ais-Hits-item`) are written as
+ * plain strings on purpose: this markup is stored in post_content by the Static
+ * Related Items block and must stay identical to what react-instantsearch-dom 6
+ * produced, otherwise existing blocks become invalid.
+ *
+ * @param props
+ * @param props.hits
+ * @param props.attributes
+ */
+export const HitItems: FC< {
+	hits: AlgoliaHit[];
 	attributes: HitItemVisibleConfig;
-	blockProps?: any
-}> = ({hits, attributes}) => {
-		
-	const {
-		displayPostAuthor,
-		displayPostDate,
-		listLayout,
-		gridColumns,
-	} = attributes
+} > = ( { hits, attributes } ) => {
+	const { displayPostAuthor, displayPostDate, listLayout, gridColumns } =
+		attributes;
 	const listBlockClassName = classnames( {
-			'wp-block-latest-posts': true,
-			'wp-block-latest-posts__list': true,
-			'is-grid': listLayout === 'grid',
-			'has-dates': displayPostDate,
-			'has-author': displayPostAuthor,
-			'wp-block-archives': true,
-			[cx('list')]: true,
-			[ `columns-${ gridColumns }` ]: listLayout === 'grid',
-	} )
+		'wp-block-latest-posts': true,
+		'wp-block-latest-posts__list': true,
+		'is-grid': listLayout === 'grid',
+		'has-dates': displayPostDate,
+		'has-author': displayPostAuthor,
+		'wp-block-archives': true,
+		'ais-Hits-list': true,
+		[ `columns-${ gridColumns }` ]: listLayout === 'grid',
+	} );
 	return (
-		<div className={classNames(cx(''))}>
-		  <ul className={listBlockClassName}>
-			{hits.map(hit => (
-			  <li className={cx('item')} key={hit.objectID}>
-				<HitItem hit={hit} attributes={attributes} />
-			  </li>
-			))}
-		  </ul>
+		<div className="ais-Hits">
+			<ul className={ listBlockClassName }>
+				{ hits.map( ( hit ) => (
+					<li className="ais-Hits-item" key={ hit.objectID }>
+						<HitItem hit={ hit } attributes={ attributes } />
+					</li>
+				) ) }
+			</ul>
 		</div>
-	)
-}
-
-const cx = (text: string) => {
-	const result = createClassNames('Hits')(text)
-	if (typeof result === 'string') return result
-	return result.join('-')
+	);
 };
-const ContainerHits = connectHits(({hits, setAttributes, attributes }: {
-    hits: any[]
-} & EditComponentProps) => {
-        useEffect(() => {
-            setAttributes({hits})
-		}, [setAttributes, hits])
-        return <HitItems hits={hits} attributes={attributes} />
-    })
 
+/**
+ * Live hits for the Static Related Items editor: shows the results and copies
+ * them into the block attributes so they are saved with the post.
+ *
+ * @param props
+ * @param props.setAttributes
+ * @param props.attributes
+ */
+const ContainerHits: FC<
+	Pick< EditComponentProps, 'setAttributes' | 'attributes' >
+> = ( { setAttributes, attributes } ) => {
+	const { items } = useHits< AlgoliaHit >();
+	useEffect( () => {
+		setAttributes( { hits: items } );
+	}, [ setAttributes, items ] );
+	return <HitItems hits={ items } attributes={ attributes } />;
+};
 
 export default ContainerHits;

@@ -3,7 +3,9 @@
  * Plugin Name:     Search with Algolia Instantsearch Blocks
  * Description:     Adding algolia backend search feature to the block editor.
  * Version:         0.2.0
- * Author:          DigitalCube Inc. 
+ * Requires at least: 6.6
+ * Requires PHP:    7.4
+ * Author:          DigitalCube Inc.
  * Author URI:      http://en.digitalcube.jp/
  * License:         GPL-2.0-or-later
  * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
@@ -14,7 +16,7 @@
 class AIB_Blocks {
 	function __construct() {
 		add_action( 'init', array( $this, 'configure_blocks' ) );
-		add_filter( 'block_categories', array( $this, 'configure_block_categories' ), 10, 1 );
+		add_filter( 'block_categories_all', array( $this, 'configure_block_categories' ), 10, 1 );
 	}
 	public function configure_admin_js() {
 		$dir = dirname( __FILE__ );

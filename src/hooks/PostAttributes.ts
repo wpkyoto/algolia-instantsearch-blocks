@@ -1,31 +1,40 @@
+import { useMemo } from 'react';
 import { useSelect } from '@wordpress/data';
 
-export const useCurrentPostCategories = () => {
-	const categoryIds = useSelect(select => {
-		return select('core/editor').getEditedPostAttribute<number[]>('categories')
-	}, [])
-	return useSelect((select) => {
-		const {getEntityRecords} = select('core')
-		const taxonomies = getEntityRecords<Array<{id: number; name: string;}>>('taxonomy', 'category')
-		if (!taxonomies) return []
-		const currentCategories = taxonomies.filter(taxonomy => {
-			return categoryIds.includes(taxonomy.id)
-		})
-		return currentCategories
-	}, [categoryIds])
-}
+type Term = { id: number; name: string };
 
-export const useCurrentPostTags = () => {
-	const tagIds = useSelect(select => {
-		return select('core/editor').getEditedPostAttribute<number[]>('tags')
-	}, [])
-	return useSelect((select) => {
-		const {getEntityRecords} = select('core')
-		const taxonomies = getEntityRecords<Array<{id: number; name: string;}>>('taxonomy', 'post_tag')
-		if (!taxonomies) return []
-		const currentTags = taxonomies.filter(taxonomy => {
-			return tagIds.includes(taxonomy.id)
-		})
-		return currentTags
-	}, [tagIds])
-}
+const useCurrentPostTerms = (
+	postAttribute: 'categories' | 'tags',
+	taxonomy: 'category' | 'post_tag'
+): Term[] => {
+	const termIds: number[] | undefined = useSelect(
+		( select ) =>
+			( select( 'core/editor' ) as any )?.getEditedPostAttribute?.(
+				postAttribute
+			),
+		[ postAttribute ]
+	);
+	const terms: Term[] | null = useSelect(
+		( select ) =>
+			( select( 'core' ) as any ).getEntityRecords(
+				'taxonomy',
+				taxonomy,
+				{
+					per_page: -1,
+				}
+			),
+		[ taxonomy ]
+	);
+	return useMemo( () => {
+		if ( ! terms || ! Array.isArray( termIds ) ) {
+			return [];
+		}
+		return terms.filter( ( term ) => termIds.includes( term.id ) );
+	}, [ terms, termIds ] );
+};
+
+export const useCurrentPostCategories = () =>
+	useCurrentPostTerms( 'categories', 'category' );
+
+export const useCurrentPostTags = () =>
+	useCurrentPostTerms( 'tags', 'post_tag' );

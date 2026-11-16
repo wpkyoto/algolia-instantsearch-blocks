@@ -5,10 +5,19 @@
 ```bash
 % git clone git@github.com:digitalcube/algolia-instantsearch-blocks.git 
 % cd algolia-instantsearch-blocks
-% yarn
-% yarn postinstall
-% yarn start
+% nvm use   # Node.js 22 (see .nvmrc)
+% npm ci
+% npm start
 ```
+
+## Checks
+
+```bash
+% npm run lint:js
+% npm run build   # runs tsc, then wp-scripts build
+```
+
+This project uses npm only (`package-lock.json`). Do not add a `yarn.lock`.
 
 ## Start WordPress using wp-env
 
@@ -16,16 +25,16 @@ We can control a local WordPress by these command.
 
 ```bash
 # Start WordPress
-% yarn wp:start
+% npm run wp:start
 
-# Steop WordPress
-% yarn wp:stop
+# Stop WordPress
+% npm run wp:stop
 
 # Delete WordPress
-% yarn wp:destroy
+% npm run wp:destroy
 
 # Execute WP-CLI on the WordPress container
-% yarn wp:cli help
+% npm run wp:cli help
 ```
 
 ## Release
